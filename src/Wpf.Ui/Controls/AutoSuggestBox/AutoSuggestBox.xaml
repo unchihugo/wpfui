@@ -140,35 +140,45 @@
                             IsOpen="{TemplateBinding IsSuggestionListOpen}"
                             Placement="Bottom"
                             PopupAnimation="Slide">
-                            <Border
-                                Margin="0"
-                                Padding="0,6,0,6"
-                                HorizontalAlignment="Stretch"
-                                Background="{DynamicResource FlyoutBackground}"
-                                BorderBrush="{DynamicResource FlyoutBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="8"
-                                SnapsToDevicePixels="True">
-                                <controls:ListView
-                                    x:Name="PART_SuggestionsList"
-                                    MaxHeight="{TemplateBinding MaxSuggestionListHeight}"
-                                    DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
-                                    ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
-                                    ItemTemplate="{TemplateBinding ItemTemplate}"
-                                    ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                    ItemsSource="{TemplateBinding ItemsSource}"
-                                    KeyboardNavigation.DirectionalNavigation="Cycle"
-                                    SelectionMode="Single">
-                                    <controls:ListView.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel
-                                                IsItemsHost="True"
-                                                IsVirtualizing="True"
-                                                VirtualizationMode="Recycling" />
-                                        </ItemsPanelTemplate>
-                                    </controls:ListView.ItemsPanel>
-                                </controls:ListView>
-                            </Border>
+                            <controls:EffectThicknessDecorator Thickness="30">
+                                <Border
+                                    Margin="0"
+                                    Padding="0,6,0,6"
+                                    HorizontalAlignment="Stretch"
+                                    Background="{DynamicResource FlyoutBackground}"
+                                    BorderBrush="{DynamicResource FlyoutBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="0,0,8,8"
+                                    SnapsToDevicePixels="True">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="20"
+                                            Direction="270"
+                                            Opacity="0.135"
+                                            ShadowDepth="10"
+                                            Color="#202020" />
+                                    </Border.Effect>
+                                    <controls:ListView
+                                        x:Name="PART_SuggestionsList"
+                                        MaxHeight="{TemplateBinding MaxSuggestionListHeight}"
+                                        DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
+                                        ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
+                                        ItemTemplate="{TemplateBinding ItemTemplate}"
+                                        ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                        ItemsSource="{TemplateBinding ItemsSource}"
+                                        KeyboardNavigation.DirectionalNavigation="Cycle"
+                                        SelectionMode="Single">
+                                        <controls:ListView.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel
+                                                    IsItemsHost="True"
+                                                    IsVirtualizing="True"
+                                                    VirtualizationMode="Recycling" />
+                                            </ItemsPanelTemplate>
+                                        </controls:ListView.ItemsPanel>
+                                    </controls:ListView>
+                                </Border>
+                            </controls:EffectThicknessDecorator>
                         </Popup>
                     </Grid>
                 </ControlTemplate>
