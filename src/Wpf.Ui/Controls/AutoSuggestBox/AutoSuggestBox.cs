@@ -545,7 +545,7 @@ public class AutoSuggestBox : ItemsControl, IIconControl
 
         if (message is PInvoke.WM_LBUTTONUP)
         {
-            if (!TextBox!.IsMouseOver && !SuggestionsList!.IsMouseOver)
+            if (TextBox!.IsFocused && !TextBox!.IsMouseOver && !SuggestionsList!.IsMouseOver)
             {
                 // Kill logical and keyboard focus
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(TextBox), null);
