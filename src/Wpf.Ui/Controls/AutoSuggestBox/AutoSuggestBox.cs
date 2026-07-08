@@ -529,12 +529,22 @@ public class AutoSuggestBox : ItemsControl, IIconControl
 
     private IntPtr Hook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
+        var message = (uint)msg;
+
+        if (message is PInvoke.WM_LBUTTONUP)
+        {
+            if (!TextBox!.IsMouseOver && !SuggestionsList!.IsMouseOver)
+            {
+                // Kill logical and keyboard focus
+                FocusManager.SetFocusedElement(FocusManager.GetFocusScope(TextBox), null);
+                Keyboard.ClearFocus();
+            }
+        }
+
         if (!IsSuggestionListOpen)
         {
             return IntPtr.Zero;
         }
-
-        var message = (uint)msg;
 
         if (message is PInvoke.WM_NCACTIVATE or PInvoke.WM_WINDOWPOSCHANGED)
         {
