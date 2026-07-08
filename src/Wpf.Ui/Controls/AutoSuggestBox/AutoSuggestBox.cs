@@ -318,6 +318,8 @@ public class AutoSuggestBox : ItemsControl, IIconControl
             TextBox.TextChanged += TextBoxOnTextChanged;
             TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
             TextBox.LostKeyboardFocus += TextBoxOnLostKeyboardFocus;
+            TextBox.GotKeyboardFocus -= TextBoxOnGotKeyboardFocus;
+            TextBox.GotKeyboardFocus += TextBoxOnGotKeyboardFocus;
         }
 
         if (SuggestionsList != null)
@@ -452,6 +454,16 @@ public class AutoSuggestBox : ItemsControl, IIconControl
         }
 
         SetCurrentValue(IsSuggestionListOpenProperty, false);
+    }
+
+    private void TextBoxOnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(TextBox!.Text))
+        {
+            return;
+        }
+
+        SetCurrentValue(IsSuggestionListOpenProperty, true);
     }
 
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
