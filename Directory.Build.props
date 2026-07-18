@@ -4,8 +4,7 @@
     <BuildToolsDirectory>$(RepositoryDirectory)build\</BuildToolsDirectory>
   </PropertyGroup>
   <PropertyGroup>
-    <Version>4.3.0</Version>
-    <AssemblyVersion>4.3.0</AssemblyVersion>
+    <Version>4.3.1-unchihugo</Version>
   </PropertyGroup>
   <PropertyGroup>
     <Company>lepo.co</Company>
