@@ -132,7 +132,7 @@
 
                         <Popup
                             x:Name="PART_SuggestionsPopup"
-                            MinWidth="{TemplateBinding ActualWidth}"
+                            MinWidth="{Binding ActualWidth, ElementName=PART_TextBox}"
                             Margin="0"
                             HorizontalAlignment="Stretch"
                             AllowsTransparency="True"
@@ -142,6 +142,7 @@
                             PopupAnimation="Slide">
                             <controls:EffectThicknessDecorator Thickness="30">
                                 <Border
+                                    Width="{Binding ActualWidth, ElementName=PART_TextBox}"
                                     Margin="0"
                                     Padding="0,6,0,6"
                                     HorizontalAlignment="Stretch"
