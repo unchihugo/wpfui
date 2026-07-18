@@ -318,6 +318,8 @@ public class AutoSuggestBox : ItemsControl, IIconControl
             TextBox.TextChanged += TextBoxOnTextChanged;
             TextBox.LostKeyboardFocus -= TextBoxOnLostKeyboardFocus;
             TextBox.LostKeyboardFocus += TextBoxOnLostKeyboardFocus;
+            TextBox.GotKeyboardFocus -= TextBoxOnGotKeyboardFocus;
+            TextBox.GotKeyboardFocus += TextBoxOnGotKeyboardFocus;
         }
 
         if (SuggestionsList != null)
@@ -454,6 +456,16 @@ public class AutoSuggestBox : ItemsControl, IIconControl
         SetCurrentValue(IsSuggestionListOpenProperty, false);
     }
 
+    private void TextBoxOnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(TextBox!.Text))
+        {
+            return;
+        }
+
+        SetCurrentValue(IsSuggestionListOpenProperty, true);
+    }
+
     private void TextBoxOnTextChanged(object sender, TextChangedEventArgs e)
     {
         AutoSuggestionBoxTextChangeReason changeReason = AutoSuggestionBoxTextChangeReason.UserInput;
@@ -529,12 +541,22 @@ public class AutoSuggestBox : ItemsControl, IIconControl
 
     private IntPtr Hook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
+        var message = (uint)msg;
+
+        if (message is PInvoke.WM_LBUTTONUP)
+        {
+            if (TextBox!.IsFocused && !TextBox!.IsMouseOver && !SuggestionsList!.IsMouseOver)
+            {
+                // Kill logical and keyboard focus
+                FocusManager.SetFocusedElement(FocusManager.GetFocusScope(TextBox), null);
+                Keyboard.ClearFocus();
+            }
+        }
+
         if (!IsSuggestionListOpen)
         {
             return IntPtr.Zero;
         }
-
-        var message = (uint)msg;
 
         if (message is PInvoke.WM_NCACTIVATE or PInvoke.WM_WINDOWPOSCHANGED)
         {

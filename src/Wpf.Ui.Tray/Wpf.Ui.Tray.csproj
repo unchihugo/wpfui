@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>WPF-UI.Tray</PackageId>
-    <TargetFrameworks>net10.0-windows;net9.0-windows;net8.0-windows;net481;net472;net462</TargetFrameworks>
+    <PackageId>unchihugo.WPF-UI.Tray</PackageId>
+    <TargetFrameworks>net10.0-windows</TargetFrameworks>
     <Description>Native tray menu icon support for WPF using the WPF UI library.</Description>
     <CommonTags>$(CommonTags);tray;notifyicon;notify</CommonTags>
     <UseWPF>true</UseWPF>
