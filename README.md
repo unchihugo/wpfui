@@ -1,3 +1,14 @@
+## List of changes compared to upstream
+* Fixed a bug where the button's foreground colors are wrong in dark mode
+* Updated AutoSuggestBox:
+  * Include drop shadows around the suggestions list and match the rounded corners to WinUI
+  * Clicking away from the AutoSuggestBox will now unfocus the text box
+  * Refocusing the text box will bring up the suggestions list instead of having to add/remove a letter for it to show up
+* Removed samples from solution to decrease repository download size *(these are helpful, please retrieve them from upstream if you require them)*
+* Removed all supported .NET versions except for .NET 10 for improved building speed *(add them back in the .csproj files if you would like to use for an older version)*
+
+---
+
 ![WPF UI Banner Dark](https://user-images.githubusercontent.com/13592821/174165081-9c62d188-ecb6-4200-abd8-419afbaf32c2.png#gh-dark-mode-only)
 ![WPF UI Banner Light](https://user-images.githubusercontent.com/13592821/174165388-921c4745-90ed-4396-9a4b-9c86478f7447.png#gh-light-mode-only)
 
